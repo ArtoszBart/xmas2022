@@ -6,8 +6,10 @@ const port = process.env.PORT || 4000;
 const axios = require('axios');
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 
 server.use(middlewares);
+server.use(cors());
 server.use(express.static(path.join(__dirname, 'public')));
 router.render = (req, res, next) => {
 	if (req.path === '/users' && !req.get('draw')) {
