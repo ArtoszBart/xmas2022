@@ -69,4 +69,5 @@ router.render = (req, res, next) => {
 
 server.use(router);
 
-server.listen(port);
+// server.listen(port);
+module.exports = server;
