@@ -47,7 +47,10 @@ router.render = (req, res, next) => {
 
 		users.forEach((user) => {
 			axios
-				.put(`http://localhost:4000/users/${user.id}`, user)
+				.put(
+					`https://nervous-dog-bonnet.cyclic.app/users/${user.id}`,
+					user
+				)
 				.then(function (response) {
 					console.log('ok');
 				})
