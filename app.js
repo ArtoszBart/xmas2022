@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const fs = require('fs');
+const cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -14,6 +15,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -33,8 +35,10 @@ app.put('/users/:id', (req, res) => {
 		users.push(req.body);
 		users.sort((u1, u2) => (u1.id > u2.id ? 1 : -1));
 		fs.writeFile('./db.json', JSON.stringify(users), (err) => {
-			res.sendStatus(400);
-			console.log(err);
+			if (err) {
+				res.sendStatus(400);
+				console.log(err);
+			}
 		});
 
 		console.log(users);
